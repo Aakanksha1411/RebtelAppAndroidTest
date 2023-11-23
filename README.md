@@ -64,7 +64,7 @@ Install the latest Maven and set the MAVEN_HOME and add it to paths in your syst
 Clone the repository: git clone https://github.com/Aakanksha1411/RebtelApp.git
 
 ### Steps
-*Set Node.js path of your machine in the data.properties under src/main/java/resources/data.properties
+* Set Node.js path of your machine in the data.properties under src/main/java/resources/data.properties
 
 * Open cmd or equivalent and go to the cloned repo location.
 
