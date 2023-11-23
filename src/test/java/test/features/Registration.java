@@ -15,30 +15,22 @@ import test.base.BaseTest;
 
 public class Registration extends BaseTest {
 
-	@Test(dataProvider="getData")
-	public void RegisterUser(HashMap<String,String> input) throws MalformedURLException {
+	@Test
+	public void RegisterUser()throws MalformedURLException {
 
 		RegisterationPage start = new RegisterationPage(driver);
 		start.getstartedbutton();
 		start.allowbutton();
-		String userCountryCode = input.get("country");
-		String userPhNumber = input.get("PhoneNumber");
-		start.setcountry(userCountryCode);
-		String s = start.enterphonenumber(userPhNumber);
+		start.setcountry("Sweden (+46)");
+		String s = start.enterphonenumber("+46707471573");
 		start.verifyphonenumber();
 		String s1 = driver.findElement(By.id("com.rebtel.android:id/smsNumber")).getText();
 		System.out.println(s1);
-		Assert.assertEquals(userPhNumber, s1);
+		Assert.assertEquals(s, s1);
 
 	}
 	
-	@DataProvider
-	public Object[][] getData() throws IOException
-	{
-		List<HashMap<String, String>>	data =getJsonData();
-		
-		return new Object[][] { {data.get(0)}  };
-	}
+
 	
 	
 	

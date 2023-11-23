@@ -47,10 +47,18 @@ public class BaseTest {
 		String hostName = apiumServerIPAddress + ":" + apiumServerPort;
 		custNumbersFilePath = System.getProperty("user.dir")+"//src//test//java//resources//data.json"; 
 		
+		String androidDeviceName = prop.getProperty("androidDeviceName");
+		String nodejspath = prop.getProperty("nodejspath");
+		
+		if (nodejspath==null || nodejspath.isEmpty())
+		{
+			System.out.println("NodeJS path is not configured. It is mandatory to be configured. Exiting..");
+			System.exit(0);
+		}
+		
 		System.out.println("Customer numbers: "+ custNumbersFilePath);
 		
-		
-		
+				
 		// This is the way to inject the any version of the apk
 		String apkPath = prop.getProperty("apkPath");
 		
@@ -59,8 +67,7 @@ public class BaseTest {
 			apkPath = System.getProperty("user.dir") + "//src//test//java//resources//rebtel6.24.0.apk";
 		}
 		
-		String androidDeviceName = prop.getProperty("androidDeviceName");
-		String nodejspath = prop.getProperty("nodejspath");
+
 		
 		DesiredCapabilities caps = new DesiredCapabilities();
 		caps.setCapability("noReset", true);
@@ -79,19 +86,7 @@ public class BaseTest {
 	}
 	
 	
-	public List<HashMap<String, String>> getJsonData() throws IOException {
-		//System.getProperty("user.dir")+"//src//test//java//resources//data.json"
-			
-				String custNumbers = FileUtils.readFileToString(new File(custNumbersFilePath),StandardCharsets.UTF_8);
-				System.out.println("Customer numbers: "+ custNumbers);
-				ObjectMapper mapper = new ObjectMapper();
-				List<HashMap<String, String>> data = mapper.readValue(custNumbers,
-						new TypeReference<List<HashMap<String, String>>>() {
-						});
-
-				return data;
-
-			}
+	
 
 	@AfterClass
 	public void teardown() {
